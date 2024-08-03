@@ -1,0 +1,31 @@
+# =============================================================================
+# File        : molt.yml
+# Author      : yukimemi
+# Last Change : 2024/08/03 20:01:50.
+# =============================================================================
+
+name: molt
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 6 * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    name: Update
+    permissions: write-all
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hasundue/molt-action@v1-rc
+        with:
+          labels: automerge
